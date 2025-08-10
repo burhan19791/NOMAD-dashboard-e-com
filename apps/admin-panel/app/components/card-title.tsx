@@ -6,8 +6,8 @@ type Props = {
 
 const CardTitle = ({ title }: Props) => {
   return (
-    <div className="mb-4">
-      <h2 className="text-font-primary text-xl font-bold">{title}</h2>
+    <div    >
+      <h2 className="text-font-primary text-xl leading-none font-semibold">{title}</h2>
     </div>
   );
 };
