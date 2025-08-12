@@ -23,6 +23,7 @@ import { Eye, MoreHorizontal, Pencil, Trash } from "lucide-react";
 
 import { useState } from "react";
 import { FaSearch } from "react-icons/fa";
+import CustomSearch from "../../custom-search";
 
 export default function OrdersTable() {
   const [currentPage, setCurrentPage] = useState(1);
@@ -79,14 +80,7 @@ export default function OrdersTable() {
     <div className="p-5 bg-card-background rounded-2xl">
       {/* Header */}
       <div className="mb-6 flex items-center justify-between">
-        <div className="w-44 h-9 bg-inner-card border border-inner-card-border rounded-lg flex items-center pl-4 pr-2 text-font-light dark:text-font-primary">
-          <FaSearch className="text-xs text-font-light dark:text-font-primary" />
-          <input
-            type="text"
-            placeholder="Search..."
-            className="ml-2 text-sm bg-transparent outline-none w-full placeholder:text-font-light dark:placeholder:text-font-primary"
-          />
-        </div>
+        <CustomSearch />
         <SortBySelect />
       </div>
 

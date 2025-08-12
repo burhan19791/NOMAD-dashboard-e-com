@@ -44,21 +44,20 @@ const SideBarExpandableLink = ({
       document.body.removeChild(el);
     };
   }, []);
-
-  const isMdLg = () => {
+  const isHoverEnabled = () => {
     if (typeof window === "undefined") return false;
     const width = window.innerWidth;
-    return width >= 768 && width < 1280;
+    return width >= 1024 && width < 1280; // only lg, exclude xl and above
   };
 
   const handleMouseEnter = () => {
-    if (!isMdLg()) return;
+    if (!isHoverEnabled()) return;
     if (timeoutRef.current) clearTimeout(timeoutRef.current);
     setIsOpen(true);
   };
 
   const handleMouseLeave = () => {
-    if (!isMdLg()) return;
+    if (!isHoverEnabled()) return;
     timeoutRef.current = setTimeout(() => {
       setIsOpen(false);
     }, 200);
@@ -82,11 +81,11 @@ const SideBarExpandableLink = ({
           className="hover:text-purple flex items-center gap-2.5 text-font-light"
         >
           {mainIcon && (
-            <span className="text-lg hidden md:flex md:text-2xl xl:text-lg">
+            <span className="text-2xl md:flex md:text-2xl xl:text-lg">
               {mainIcon}
             </span>
           )}
-          <div className="hidden xl:flex xl:items-center xl:gap-3">
+          <div className="lg:hidden xl:flex flex items-center gap-3">
             {mainLabel}
             {isOpen ? (
               <FaChevronDown className="text-xs" />
@@ -97,7 +96,7 @@ const SideBarExpandableLink = ({
         </div>
 
         {isOpen && (
-          <div className="ml-7 mt-3 hidden text-sm xl:flex xl:flex-col xl:gap-2 text-left text-font-light">
+          <div className="ml-7 mt-3 lg:hidden flex-col gap-2 flex text-sm xl:flex xl:flex-col xl:gap-2 text-left text-font-light">
             {items.map((item) => (
               <div
                 key={item.label}
@@ -128,7 +127,7 @@ const SideBarExpandableLink = ({
                 zIndex: 999999,
                 minWidth: "160px",
               }}
-              className="hidden md:flex lg:flex xl:hidden bg-inner-card p-4 rounded-md shadow-xl flex-col gap-3 text-font-light"
+              className="hidden lg:flex xl:hidden bg-inner-card p-4 rounded-md shadow-xl flex-col gap-3 text-font-light"
               onMouseEnter={handleMouseEnter}
               onMouseLeave={handleMouseLeave}
             >

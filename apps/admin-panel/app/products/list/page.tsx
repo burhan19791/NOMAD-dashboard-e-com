@@ -74,18 +74,24 @@ const ProductsList = () => {
 
         <div className="col-span-12 flex justify-between items-center">
           <CardTitle title="Products List" />
-          <div className="flex items-center gap-4">
-            <Button className="bg-white gap-2 py-5 hover:bg-gray-200 border border-gray-300 dark:border-inner-card dark:bg-inner-card text-font-primary">
+          <div className="flex items-center md:gap-4 gap-2">
+            <Button
+              className="bg-white gap-2 dark:hover:bg-inner-card py-2 px-3 md:py-5 md:px-4 hover:bg-gray-200 border border-gray-300  dark:border-inner-card dark:bg-inner-card text-font-primary"
+            >
               <FaDownload />
-              Download
+              <div className="hidden md:flex">Download</div>
             </Button>
-            <Button className="bg-white gap-2 py-5 hover:bg-gray-200 border border-gray-300 dark:border-inner-card dark:bg-inner-card text-font-primary">
-              <MdPrint className="text-lg" />
-              Print
+            <Button
+              className="bg-white gap-2 dark:hover:bg-inner-card py-2 px-3 md:py-5 md:px-4 hover:bg-gray-200 border border-gray-300  dark:border-inner-card dark:bg-inner-card text-font-primary"
+            >
+              <MdPrint className="text-lg"/>
+              <div className="hidden md:flex">Print</div>
             </Button>
-            <Button className="bg-purple gap-2 dark:bg-purple py-5 hover:bg-purple-700 dark:hover:bg-purple-700 text-white">
-              <TiPlus />
-              Add New Product
+           <Button
+              className="bg-purple dark:bg-purple dark:hover:bg-purple-700 gap-2 py-2 px-3 md:py-5 md:px-4 hover:bg-purple-700  text-white"
+            >
+              <TiPlus className="text-lg"/>
+              <div className="hidden md:flex">Add New Product</div>
             </Button>
           </div>
         </div>

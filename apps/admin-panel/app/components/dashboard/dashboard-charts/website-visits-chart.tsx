@@ -6,8 +6,11 @@ import { ApexOptions } from "apexcharts";
 
 const WebsiteVisitsChart: React.FC = () => {
   const [isDark, setIsDark] = useState(false);
+  const [isClient, setIsClient] = useState(false); // track if on client
 
   useEffect(() => {
+    setIsClient(true); // mark client side after mount
+
     setIsDark(document.documentElement.classList.contains("dark"));
 
     const observer = new MutationObserver(() => {
@@ -35,24 +38,8 @@ const WebsiteVisitsChart: React.FC = () => {
         columnWidth: "45%",
         colors: {
           backgroundBarColors: isDark
-            ? [
-                "#2c2c2c",
-                "#2c2c2c",
-                "#2c2c2c",
-                "#2c2c2c",
-                "#2c2c2c",
-                "#2c2c2c",
-                "#2c2c2c",
-              ]
-            : [
-                "#f3f4f6",
-                "#f3f4f6",
-                "#f3f4f6",
-                "#f3f4f6",
-                "#f3f4f6",
-                "#f3f4f6",
-                "#f3f4f6",
-              ],
+            ? Array(7).fill("#2c2c2c")
+            : Array(7).fill("#f3f4f6"),
           backgroundBarOpacity: 1,
           backgroundBarRadius: 4,
         },
@@ -88,13 +75,8 @@ const WebsiteVisitsChart: React.FC = () => {
         w,
       }: {
         seriesIndex: number;
-        w: ApexChart & {
-          globals: {
-            dom: {
-              baseEl: SVGSVGElement | null;
-            };
-          };
-        }; // this 'ApexChart' is from apexcharts types
+        //eslint-disable-next-line
+        w: any;
       }) {
         const svg = w.globals.dom.baseEl?.querySelector("svg");
         if (!svg) return "#7c3aed";
@@ -125,15 +107,15 @@ const WebsiteVisitsChart: React.FC = () => {
           );
           stop1.setAttribute("offset", "0%");
           stop1.setAttribute("stop-color", "#7c3aed");
-          stop1.setAttribute("stop-opacity", isDark ? "0.95" : "0.8"); // stronger start
+          stop1.setAttribute("stop-opacity", isDark ? "0.95" : "0.8");
 
           const stop2 = document.createElementNS(
             "http://www.w3.org/2000/svg",
             "stop"
           );
-          stop2.setAttribute("offset", "70%"); // fade starts later
+          stop2.setAttribute("offset", "70%");
           stop2.setAttribute("stop-color", "#6b46c1");
-          stop2.setAttribute("stop-opacity", isDark ? "0.5" : "0.3"); // slower fade
+          stop2.setAttribute("stop-opacity", isDark ? "0.5" : "0.3");
 
           const stop3 = document.createElementNS(
             "http://www.w3.org/2000/svg",
@@ -141,7 +123,7 @@ const WebsiteVisitsChart: React.FC = () => {
           );
           stop3.setAttribute("offset", "100%");
           stop3.setAttribute("stop-color", "#6b46c1");
-          stop3.setAttribute("stop-opacity", "0.1"); // subtle fade out end
+          stop3.setAttribute("stop-opacity", "0.1");
 
           gradient.appendChild(stop1);
           gradient.appendChild(stop2);
@@ -152,7 +134,6 @@ const WebsiteVisitsChart: React.FC = () => {
         return `url(#${gradientId})`;
       },
     ],
-
     tooltip: {
       theme: isDark ? "dark" : "light",
       y: {
@@ -160,7 +141,7 @@ const WebsiteVisitsChart: React.FC = () => {
       },
       marker: {
         show: true,
-        fillColors: ["#7c6bff"], // purple marker
+        fillColors: ["#7c6bff"],
       },
     },
   };
@@ -171,6 +152,8 @@ const WebsiteVisitsChart: React.FC = () => {
       data: [120, 200, 150, 170, 220, 300, 250],
     },
   ];
+
+  if (!isClient) return null; // no SSR render, avoid window errors
 
   return (
     <ReactApexChart options={options} series={series} type="bar" height={370} />

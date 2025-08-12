@@ -4,7 +4,7 @@ import { FaCartShopping } from "react-icons/fa6";
 import DashboardRevenueCard from "./components/dashboard/dashboard-cards/dashboard-revenue-card";
 import DashboardSummaryCard from "./components/dashboard/dashboard-cards/dashboard-summary-cards";
 import WebsiteVisitsCard from "./components/dashboard/dashboard-cards/website-visits-card"; // New visits chart
-import ProductsTable from "./components/dashboard/dashboard-tables/recent-oreders-table";
+import ProductsTable from "./components/dashboard/dashboard-tables/recent-orders-table";
 import { BsFillBoxFill } from "react-icons/bs";
 import { FaMoneyBillWave } from "react-icons/fa";
 import { TbCoinFilled } from "react-icons/tb";

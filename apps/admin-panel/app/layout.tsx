@@ -5,6 +5,7 @@ import Topbar from "./components/topbar";
 import Head from "next/head";
 import SideBar2 from "./components/side-bar";
 import SideBar from "./components/side-bar";
+import TopbarSidebarLayout from "./components/topbar-sidebar-layout";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -34,8 +35,7 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <SideBar />
-        <Topbar />
+        <TopbarSidebarLayout />
         <div className="background min-h-screen">{children}</div>
       </body>
     </html>

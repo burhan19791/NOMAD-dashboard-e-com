@@ -108,10 +108,12 @@ const ProductsList = () => {
         {/* Header & Add Product Button */}
         <div className="col-span-12 mt-6 flex justify-between items-center">
           <CardTitle title="Products Grid" />
-          <Button className="bg-purple gap-2 dark:bg-purple py-5 hover:bg-purple-700 dark:hover:bg-purple-700 text-white">
-            <TiPlus />
-            Add New Product
-          </Button>
+          <Button
+              className="bg-purple dark:bg-purple dark:hover:bg-purple-700 gap-2 py-2 px-3 md:py-5 md:px-4 hover:bg-purple-700  text-white"
+            >
+              <TiPlus className="text-lg"/>
+              <div className="hidden md:flex">Add New Product</div>
+            </Button>
         </div>
 
         {/* Map the products array here */}

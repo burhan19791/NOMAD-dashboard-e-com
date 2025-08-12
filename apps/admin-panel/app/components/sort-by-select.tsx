@@ -1,5 +1,6 @@
 import React from "react";
 import CustomDropdown from "./custom-select";
+import { FaHourglassHalf } from "react-icons/fa";
 
 const SortBySelect = () => {
   const sortOptions = [
@@ -8,7 +9,13 @@ const SortBySelect = () => {
     { value: "daily", label: "Daily" },
   ];
 
-  return <CustomDropdown options={sortOptions} placeholder="Sort By" />;
+  return (
+    <CustomDropdown
+      options={sortOptions}
+      placeholder="Sort By"
+      smIcon={<FaHourglassHalf />}
+    />
+  );
 };
 
 export default SortBySelect;

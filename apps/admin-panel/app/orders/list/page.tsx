@@ -70,13 +70,17 @@ const OrdersList = () => {
         <div className="col-span-12 flex justify-between items-center">
           <CardTitle title="Orders List" />
           <div className="flex items-center gap-4">
-            <Button className="bg-white gap-2 py-5 hover:bg-gray-200 border border-gray-300 dark:border-inner-card dark:bg-inner-card text-font-primary">
+            <Button
+              className="bg-white gap-2 dark:hover:bg-inner-card py-2 px-3 md:py-5 md:px-4 hover:bg-gray-200 border border-gray-300  dark:border-inner-card dark:bg-inner-card text-font-primary"
+            >
               <FaDownload />
-              Download
+              <div className="hidden md:flex">Download</div>
             </Button>
-            <Button className="bg-white gap-2 py-5 hover:bg-gray-200 border border-gray-300 dark:border-inner-card dark:bg-inner-card text-font-primary">
-              <MdPrint className="text-lg" />
-              Print
+            <Button
+              className="bg-white gap-2 dark:hover:bg-inner-card py-2 px-3 md:py-5 md:px-4 hover:bg-gray-200 border border-gray-300  dark:border-inner-card dark:bg-inner-card text-font-primary"
+            >
+              <MdPrint className="text-lg"/>
+              <div className="hidden md:flex">Print</div>
             </Button>
           </div>
         </div>

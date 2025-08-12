@@ -19,10 +19,12 @@ import {
 } from "flowbite-react";
 import { Eye, MoreHorizontal, Pencil, Trash } from "lucide-react";
 import CardTitle from "../../card-title";
-import { FaSearch } from "react-icons/fa";
+import { FaSearch, FaSlidersH } from "react-icons/fa";
 import CustomDropdown from "../../custom-select";
 import SortBySelect from "../../sort-by-select";
 import { useState } from "react";
+import CustomTextSelect from "../../custom-text-select";
+import CustomSearch from "../../custom-search";
 
 export default function RecentOrdersTable() {
   const [currentPage, setCurrentPage] = useState(1);
@@ -116,19 +118,18 @@ export default function RecentOrdersTable() {
       {/* Header stays fixed */}
       <div className="flex justify-between items-center mb-6">
         <CardTitle title="Recent Orders" />
-        <div className="flex items-center gap-4">
+        <div className="flex items-center gap-2 md:gap-4">
           {/* Search */}
-          <div className="w-44 h-9 bg-inner-card border border-inner-card-border rounded-lg flex items-center pl-4 pr-2 text-font-light dark:text-font-primary">
-            <FaSearch className="text-xs text-font-light dark:text-font-primary" />
-            <input
-              type="text"
-              placeholder="Search..."
-              className="ml-2 text-sm bg-transparent outline-none w-full placeholder:text-font-light dark:placeholder:text-font-primary"
-            />
-          </div>
+          <CustomSearch />
 
           {/* Status Select */}
-          <CustomDropdown placeholder="Status" options={statusOptions} />
+          <div>
+            <CustomDropdown
+              placeholder="Status"
+              smIcon={<FaSlidersH />}
+              options={statusOptions}
+            />
+          </div>
 
           {/* Sort By Select */}
           <SortBySelect />

@@ -1,8 +1,13 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import ReactApexChart from "react-apexcharts";
+import dynamic from "next/dynamic";
 import { ApexOptions } from "apexcharts";
+
+// Dynamically import ReactApexChart with SSR disabled
+const ReactApexChart = dynamic(() => import("react-apexcharts"), {
+  ssr: false,
+});
 
 const RevenueChart = () => {
   const [isDark, setIsDark] = useState(false);
@@ -27,19 +32,19 @@ const RevenueChart = () => {
       type: "area",
       toolbar: { show: false },
       zoom: { enabled: false },
-      foreColor: isDark ? "#9ca3af" : "#6b7280", // text color for axes (tailwind slate-400 / slate-500)
+      foreColor: isDark ? "#9ca3af" : "#6b7280",
     },
     stroke: {
       curve: "smooth",
       width: 3,
-      colors: ["#7c3aed"], // purple line for both light and dark mode
+      colors: ["#7c3aed"],
     },
     fill: {
       type: "gradient",
       gradient: {
         shade: "light",
         type: "vertical",
-        opacityFrom: isDark ? 0.7 : 0.4, // lighter fill on light mode
+        opacityFrom: isDark ? 0.7 : 0.4,
         opacityTo: isDark ? 0 : 0.1,
         stops: [0, 50, 100],
         colorStops: [
@@ -91,17 +96,15 @@ const RevenueChart = () => {
       style: {
         fontSize: "14px",
         fontFamily: "'Outfit', sans-serif",
-        // no color here, ApexCharts typings don't allow it
       },
-
       marker: {
         show: true,
-        fillColors: ["#7c6bff"], // purple marker
+        fillColors: ["#7c6bff"],
       },
     },
     markers: {
       size: 0,
-      colors: ["#7c3aed"], // match series colors
+      colors: ["#7c3aed"],
       strokeColors: ["#7c3aed"],
       strokeWidth: 2,
       hover: {

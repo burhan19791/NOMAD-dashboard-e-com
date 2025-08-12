@@ -23,9 +23,11 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import { PiSlidersFill } from "react-icons/pi";
 
 import { Eye, MoreHorizontal, Pencil, Trash } from "lucide-react";
-import { FaSearch } from "react-icons/fa";
+import { FaSearch, FaSlidersH } from "react-icons/fa";
+import CustomSearch from "../../custom-search";
 
 export default function CustomersTable() {
   const [currentPage, setCurrentPage] = useState(1);
@@ -106,14 +108,7 @@ export default function CustomersTable() {
       <div className="mb-6">
         <div className="flex items-center justify-between">
           {/* Search */}
-          <div className="w-44 h-9 bg-inner-card border border-inner-card-border rounded-lg flex items-center pl-4 pr-2 text-font-light dark:text-font-primary">
-            <FaSearch className="text-xs text-font-light dark:text-font-primary" />
-            <input
-              type="text"
-              placeholder="Search..."
-              className="ml-2 text-sm bg-transparent outline-none w-full placeholder:text-font-light dark:placeholder:text-font-primary"
-            />
-          </div>
+          <CustomSearch />
           <div className="flex items-center gap-4">
             {/* Status filter */}
             <CustomSelect
@@ -123,6 +118,8 @@ export default function CustomersTable() {
                 { value: "active", label: "Active" },
                 { value: "inactive", label: "Inactive" },
               ]}
+              smIcon={<FaSlidersH />
+}
             />
 
             {/* Sort By Select */}

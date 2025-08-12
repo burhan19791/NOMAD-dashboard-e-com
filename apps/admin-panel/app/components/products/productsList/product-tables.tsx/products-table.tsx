@@ -23,7 +23,8 @@ import {
 import { Eye, MoreHorizontal, Pencil, Trash } from "lucide-react";
 
 import { useState } from "react";
-import { FaSearch, FaStar } from "react-icons/fa";
+import { FaSearch, FaSlidersH, FaStar } from "react-icons/fa";
+import CustomSearch from "@/app/components/custom-search";
 
 export default function ProductsTable() {
   const [currentPage, setCurrentPage] = useState(1);
@@ -99,17 +100,14 @@ export default function ProductsTable() {
       <div className="mb-6">
         <div className="flex items-center justify-between">
           {/* Search */}
-          <div className="w-44 h-9 bg-inner-card border border-inner-card-border rounded-lg flex items-center pl-4 pr-2 text-font-light dark:text-font-primary">
-            <FaSearch className="text-xs text-font-light dark:text-font-primary" />
-            <input
-              type="text"
-              placeholder="Search..."
-              className="ml-2 text-sm bg-transparent outline-none w-full placeholder:text-font-light dark:placeholder:text-font-primary"
-            />
-          </div>
-          <div className="flex items-center gap-4">
+          <CustomSearch />
+          <div className="flex items-center gap-2 md:gap-4">
             {/* Stock Status Select */}
-            <CustomSelect placeholder="Stock Status" options={statusOptions} />
+            <CustomSelect
+              placeholder="Stock Status"
+              smIcon={<FaSlidersH />}
+              options={statusOptions}
+            />
 
             {/* Sort By Select */}
             <SortBySelect />
