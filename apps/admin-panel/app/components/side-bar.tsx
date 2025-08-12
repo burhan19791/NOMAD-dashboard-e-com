@@ -31,6 +31,10 @@ import ProductsHover from "./navbar-expandable-link";
 import SideBarExpandableLink from "./navbar-expandable-link";
 import { IoPeople, IoPerson } from "react-icons/io5";
 
+type Props = {
+  isOpen: boolean;
+};
+
 const SideBar = () => {
   const [activeLink, setActiveLink] = useState<string>("dashboard");
   const [logoutOpen, setLogoutOpen] = useState(false);
@@ -51,7 +55,11 @@ const SideBar = () => {
 
   return (
     <>
-      <nav className="flex-col fixed top-0 font-medium  min-h-screen hidden lg:flex lg:w-20 xl:w-64 pt-7 bg-card-background w-64 p-4 xl:pl-5 xl:p-10">
+      <nav
+        className={`flex-col fixed top-0  lg:translate-x-0 font-medium min-h-screen hidden lg:flex lg:w-20 xl:w-64 pt-7 bg-card-background w-64 p-4 xl:pl-5 xl:p-10
+          //isOpen ? "translate-x-0" : "-translate-x-full"
+        `}
+      >
         {/* logo small show thing */}
         <div className="flex items-center gap-1.5 mb-10">
           <div className="w-8 h-8 lg:w-12 lg:h-12 relative xl:w-8 xl:h-8  mt-0.5 top-0 right-0 ">

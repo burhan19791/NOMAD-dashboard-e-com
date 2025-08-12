@@ -34,10 +34,8 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <SideBar  />
-        <div className="lg:ml-20 xl:ml-64">
-          <Topbar />
-        </div>
+        <SideBar />
+        <Topbar />
         <div className="background min-h-screen">{children}</div>
       </body>
     </html>

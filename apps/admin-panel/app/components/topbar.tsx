@@ -17,7 +17,7 @@ const Topbar = () => {
   const [isDarkMode, setIsDarkMode] = useState(false);
 
   return (
-    <div className=" bg-card-background p-6 py-7  flex items-center  justify-between">
+    <div className="lg:ml-20 xl:ml-64 bg-card-background p-6 py-7  flex items-center  justify-between">
       <div className="font-medium text-lg text-font-primary flex items-center gap-4">
         {isDarkMode ? (
           <Image
@@ -41,7 +41,7 @@ const Topbar = () => {
         </div>
       </div>
       <div className="flex items-center gap-4">
-        <div className="w-64 h-9 dark:bg-inner-card border bg-gray-100 border-inner-card-border rounded-lg flex items-center pl-4 pr-2 text-gray-400">
+        <div className="w-32 md:w-64 h-9 dark:bg-inner-card border bg-gray-100 border-inner-card-border rounded-lg flex items-center pl-4 pr-2 text-gray-400">
           <FaSearch className="text-xs text-gray-400" />
           <input
             type="text"
