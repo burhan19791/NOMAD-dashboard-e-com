@@ -1,13 +1,8 @@
 "use client";
 
+import React, { useState } from "react";
 import CardTitle from "@/app/components/card-title";
 import SortBySelect from "@/app/components/sort-by-select";
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
 import CustomSelect from "@/app/components/custom-select";
 
 import {
@@ -19,78 +14,90 @@ import {
   TableCell,
   Badge,
   Pagination,
+  Checkbox,
 } from "flowbite-react";
+
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
+
 import { Eye, MoreHorizontal, Pencil, Trash } from "lucide-react";
+import { FaSearch } from "react-icons/fa";
 
-import { useState } from "react";
-import { FaSearch, FaStar } from "react-icons/fa";
-
-export default function ProductsTable() {
+export default function CustomersTable() {
   const [currentPage, setCurrentPage] = useState(1);
+  const [selected, setSelected] = useState<string[]>([]);
 
   const onPageChange = (page: number) => setCurrentPage(page);
 
-  const products = [
+  // Dummy customer data
+  const customers = [
     {
-      id: "P1001",
-      title: "Black Hoodie",
-      description: "Comfortable black hoodie...",
-      category: "Apparel",
-      price: 49.99,
-      rating: 4.5,
-      stock: 25,
-      createdAt: "2025-07-20",
-      updatedAt: "2025-08-01",
+      id: "C1001",
+      fullName: "John Doe",
+      email: "john@example.com",
+      phone: "+123456789",
+      created_at: "2024-11-01",
+      last_active_at: "2025-08-10",
+      total_orders: 15,
+      total_spent: 1200.5,
+      status: "active",
     },
     {
-      id: "P1002",
-      title: "Nomad Cap",
-      description: "Stylish cap for...",
-      category: "Accessories",
-      price: 19.99,
-      rating: 4.1,
-      stock: 100,
-      createdAt: "2025-06-15",
-      updatedAt: "2025-07-28",
+      id: "C1002",
+      fullName: "Jane Smith",
+      email: "jane@example.com",
+      phone: "+987654321",
+      created_at: "2023-05-21",
+      last_active_at: "2025-07-30",
+      total_orders: 7,
+      total_spent: 450.0,
+      status: "inactive",
     },
     {
-      id: "P1003",
-      title: "Cargo Pants",
-      description: "Durable cargo pants...",
-      category: "Apparel",
-      price: 59.99,
-      rating: 4.7,
-      stock: 0,
-      createdAt: "2025-05-30",
-      updatedAt: "2025-07-25",
+      id: "C1003",
+      fullName: "Alice Johnson",
+      email: "alice@example.com",
+      phone: "+192837465",
+      created_at: "2025-02-14",
+      last_active_at: "2025-08-05",
+      total_orders: 23,
+      total_spent: 2750.75,
+      status: "active",
     },
   ];
 
-  const statusOptions = [
-    { value: "all", label: "All" },
-    { value: "in-stock", label: "In Stock" },
-    { value: "low-stock", label: "Low Stock" },
-    { value: "out-of-stock", label: "Out of Stock" },
-  ];
-
-  const getStockBadge = (stock: number) => {
-    if (stock === 0)
-      return (
-        <Badge color="failure" className="py-1.5 text-nowrap rounded-md w-fit">
-          Out of Stock
-        </Badge>
-      );
-    if (stock < 10)
-      return (
-        <Badge color="warning" className="py-1.5 text-nowrap rounded-md w-fit">
-          Low Stock
-        </Badge>
-      );
-    return (
-      <Badge color="success" className="py-1.5 text-nowrap rounded-md w-fit">
-        In Stock
-      </Badge>
+  // Handle checkbox toggle
+  const toggleSelect = (id: string) => {
+    setSelected((prev) =>
+      prev.includes(id) ? prev.filter((i) => i !== id) : [...prev, id]
     );
+  };
+
+  // Handle select all checkbox
+  const toggleSelectAll = () => {
+    if (selected.length === customers.length) setSelected([]);
+    else setSelected(customers.map((c) => c.id));
+  };
+
+  // Status badge helper
+  const getStatusBadge = (status: string) => {
+    if (status === "active")
+      return (
+        <Badge color="success" className="py-1 px-2 rounded-md text-xs">
+          Active
+        </Badge>
+      );
+    if (status === "inactive")
+      return (
+        <Badge color="gray" className="py-1 px-2 rounded-md text-xs">
+          Inactive
+        </Badge>
+      );
+    return null;
   };
 
   return (
@@ -108,8 +115,15 @@ export default function ProductsTable() {
             />
           </div>
           <div className="flex items-center gap-4">
-            {/* Stock Status Select */}
-            <CustomSelect placeholder="Stock Status" options={statusOptions} />
+            {/* Status filter */}
+            <CustomSelect
+              placeholder="Status"
+              options={[
+                { value: "all", label: "All" },
+                { value: "active", label: "Active" },
+                { value: "inactive", label: "Inactive" },
+              ]}
+            />
 
             {/* Sort By Select */}
             <SortBySelect />
@@ -122,32 +136,40 @@ export default function ProductsTable() {
         <Table hoverable>
           <TableHead className="bg-inner-card border-b border-inner-card-border">
             <TableRow>
-              <TableHeadCell className="whitespace-nowrap text-font-light bg-white dark:bg-inner-card">
-                Product ID
+              <TableHeadCell className="w-12 bg-white dark:bg-inner-card">
+                <Checkbox
+                  className="dark:bg-inner-card"
+                  checked={selected.length === customers.length}
+                  onChange={toggleSelectAll}
+                  aria-label="Select all customers"
+                />
               </TableHeadCell>
               <TableHeadCell className="whitespace-nowrap text-font-light bg-white dark:bg-inner-card">
-                Title
+                ID
               </TableHeadCell>
               <TableHeadCell className="whitespace-nowrap text-font-light bg-white dark:bg-inner-card">
-                Description
+                Name
               </TableHeadCell>
               <TableHeadCell className="whitespace-nowrap text-font-light bg-white dark:bg-inner-card">
-                Category
+                Email
               </TableHeadCell>
               <TableHeadCell className="whitespace-nowrap text-font-light bg-white dark:bg-inner-card">
-                Price
+                Phone
               </TableHeadCell>
               <TableHeadCell className="whitespace-nowrap text-font-light bg-white dark:bg-inner-card">
-                Rating
+                Joined
               </TableHeadCell>
               <TableHeadCell className="whitespace-nowrap text-font-light bg-white dark:bg-inner-card">
-                Stock
+                Last Active
               </TableHeadCell>
               <TableHeadCell className="whitespace-nowrap text-font-light bg-white dark:bg-inner-card">
-                Created At
+                Total Orders
               </TableHeadCell>
               <TableHeadCell className="whitespace-nowrap text-font-light bg-white dark:bg-inner-card">
-                Updated At
+                Total Spent
+              </TableHeadCell>
+              <TableHeadCell className="whitespace-nowrap text-font-light bg-white dark:bg-inner-card">
+                Status
               </TableHeadCell>
               <TableHeadCell className="whitespace-nowrap text-font-light bg-white dark:bg-inner-card">
                 Actions
@@ -156,39 +178,43 @@ export default function ProductsTable() {
           </TableHead>
 
           <TableBody className="divide-y divide-inner-card-border">
-            {products.map((product) => (
+            {customers.map((cust) => (
               <TableRow
-                key={product.id}
+                key={cust.id}
                 className="hover:dark:bg-inner-card transition"
               >
-                <TableCell className="whitespace-nowrap text-purple underline cursor-pointer">
-                  {product.id}
+                <TableCell className="w-12">
+                  <Checkbox
+                    className="dark:bg-inner-card"
+                    checked={selected.includes(cust.id)}
+                    onChange={() => toggleSelect(cust.id)}
+                    aria-label={`Select customer ${cust.id}`}
+                  />
                 </TableCell>
-                <TableCell className="text-font-light ">
-                  {product.title}
+                <TableCell className="text-purple underline cursor-pointer">
+                  {cust.id}
                 </TableCell>
                 <TableCell className="text-font-light">
-                  {product.description}
+                  <div className="flex items-center gap-3">
+                    <div className="bg-gray-200 dark:bg-inner-card min-h-8 min-w-8 rounded-full" />
+                    {cust.fullName}
+                  </div>
+                </TableCell>
+                <TableCell className="text-font-light">{cust.email}</TableCell>
+                <TableCell className="text-font-light">{cust.phone}</TableCell>
+                <TableCell className="text-font-light whitespace-nowrap">
+                  {cust.created_at}
+                </TableCell>
+                <TableCell className="text-font-light whitespace-nowrap">
+                  {cust.last_active_at}
                 </TableCell>
                 <TableCell className="text-font-light">
-                  {product.category}
+                  {cust.total_orders}
                 </TableCell>
-                <TableCell className="text-purple whitespace-nowrap">
-                  ${product.price.toFixed(2)}
+                <TableCell className="text-font-light">
+                  ${cust.total_spent.toFixed(2)}
                 </TableCell>
-                <TableCell className="text-font-light whitespace-nowrap">
-                  <span className="flex items-center gap-2">
-                    {product.rating.toFixed(1)}
-                    <FaStar className="text-yellow" />
-                  </span>
-                </TableCell>
-                <TableCell>{getStockBadge(product.stock)}</TableCell>
-                <TableCell className="text-font-light whitespace-nowrap">
-                  {product.createdAt}
-                </TableCell>
-                <TableCell className="text-font-light whitespace-nowrap">
-                  {product.updatedAt}
-                </TableCell>
+                <TableCell>{getStatusBadge(cust.status)}</TableCell>
                 <TableCell>
                   <DropdownMenu>
                     <DropdownMenuTrigger asChild>
@@ -224,7 +250,7 @@ export default function ProductsTable() {
           className="flex justify-between items-center"
           layout="table"
           itemsPerPage={10}
-          totalItems={products.length}
+          totalItems={customers.length}
           onPageChange={onPageChange}
           currentPage={currentPage}
           showIcons

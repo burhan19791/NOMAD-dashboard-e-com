@@ -1,29 +1,65 @@
 "use client";
 
 import CardTitle from "@/app/components/card-title";
-import ProductsTable from "@/app/components/products/productsList/product-tables.tsx/products-table";
 import ProductsOverviewCard from "@/app/components/products/productsList/products-overview-cards/products-overview-cards";
 import { Breadcrumb, BreadcrumbItem, Button } from "flowbite-react";
 import {
   FaBox,
   FaDollarSign,
-  FaDownload,
   FaExclamationTriangle,
-  FaPrint,
-  FaShoppingBag,
   FaWallet,
+  FaShoppingBag,
 } from "react-icons/fa";
 import { TiPlus } from "react-icons/ti";
-import { MdPrint } from "react-icons/md";
+import ProductsGridCards from "@/app/components/products/productsGrid/products-grid-card";
 
 const ProductsList = () => {
+  const products = [
+    {
+      imageSrc: "/images/shirt-guy.png",
+      title: "Black Hoodie",
+      price: 75.99,
+      description: "Comfortable and warm black hoodie.",
+      rating: 4,
+      reviewsCount: 20,
+      category: "Apparel",
+    },
+    {
+      imageSrc: "/images/nomad-cap.png",
+      title: "Nomad Cap",
+      price: 25.0,
+      description: "Stylish cap for everyday wear and stuff.",
+      rating: 5,
+      reviewsCount: 15,
+      category: "Accessories",
+    },
+    {
+      imageSrc: "/images/cargo-pants.png",
+      title: "Cargo Pants",
+      price: 59.99,
+      description: "Durable cargo pants with lots of pockets.",
+      rating: 3,
+      reviewsCount: 8,
+      category: "Apparel",
+    },
+    {
+      imageSrc: "/images/cargo-pants.png",
+      title: "Cargo Pants",
+      price: 59.99,
+      description: "Durable cargo pants with lots of pockets.",
+      rating: 3,
+      reviewsCount: 8,
+      category: "Apparel",
+    },
+  ];
+
   return (
     <div className="lg:ml-20 xl:ml-64 p-6">
       <Breadcrumb className="mb-6">
         <BreadcrumbItem href="#" icon={FaShoppingBag}>
           Products
         </BreadcrumbItem>
-        <BreadcrumbItem href="#">List View</BreadcrumbItem>
+        <BreadcrumbItem href="#">Gird View</BreadcrumbItem>
       </Breadcrumb>
       <div className="grid grid-cols-12 gap-4">
         <div className="col-span-12 xl:col-span-3 md:col-span-6">
@@ -68,30 +104,33 @@ const ProductsList = () => {
             icon={<FaWallet className="text-xl" />}
           />
         </div>
-        {/* <div className="col-span-12">
-          <TableSortingCard />
-        </div>   */}
 
-        <div className="col-span-12 flex justify-between items-center">
-          <CardTitle title="Products List" />
-          <div className="flex items-center gap-4">
-            <Button className="bg-white gap-2 py-5 hover:bg-gray-200 border border-gray-300 dark:border-inner-card dark:bg-inner-card text-font-primary">
-              <FaDownload />
-              Download
-            </Button>
-            <Button className="bg-white gap-2 py-5 hover:bg-gray-200 border border-gray-300 dark:border-inner-card dark:bg-inner-card text-font-primary">
-              <MdPrint className="text-lg" />
-              Print
-            </Button>
-            <Button className="bg-purple gap-2 dark:bg-purple py-5 hover:bg-purple-700 dark:hover:bg-purple-700 text-white">
-              <TiPlus />
-              Add New Product
-            </Button>
+        {/* Header & Add Product Button */}
+        <div className="col-span-12 mt-6 flex justify-between items-center">
+          <CardTitle title="Products Grid" />
+          <Button className="bg-purple gap-2 dark:bg-purple py-5 hover:bg-purple-700 dark:hover:bg-purple-700 text-white">
+            <TiPlus />
+            Add New Product
+          </Button>
+        </div>
+
+        {/* Map the products array here */}
+        {products.map((product, index) => (
+          <div
+            key={index}
+            className="lg:col-span-3 sm:col-span-6 col-span-12 md:col-span-6"
+          >
+            <ProductsGridCards
+              imageSrc={product.imageSrc}
+              title={product.title}
+              price={product.price}
+              description={product.description}
+              rating={product.rating}
+              reviewsCount={product.reviewsCount}
+              category={product.category}
+            />
           </div>
-        </div>
-        <div className="col-span-12">
-          <ProductsTable />
-        </div>
+        ))}
       </div>
     </div>
   );

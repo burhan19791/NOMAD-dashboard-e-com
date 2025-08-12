@@ -39,15 +39,14 @@ const CustomerRetentionCard = () => {
       <p className="text-xs text-font-light w-2/3 mb-5">
         Percentage of customers who made repeat purchases in the last month.
       </p>
-
-      <div className="w-full grid grid-cols-2 gap-y-6 border-t border-white/10 pt-4 text-xs text-font-light">
-        <div className="border-r border-white/10">
+      <div className="w-full grid grid-cols-2 gap-y-6 pt-4 text-xs text-font-light">
+        <div>
           <div className="font-semibold text-font-primary">
             {retentionData.totalCustomers.toLocaleString()}
           </div>
           <div>Total Customers</div>
         </div>
-        <div className="border-r border-white/10">
+        <div>
           <div className="font-semibold text-font-primary">
             {retentionData.returningCustomers.toLocaleString()}
           </div>

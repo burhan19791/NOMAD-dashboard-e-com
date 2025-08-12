@@ -4,10 +4,14 @@ import clsx from "clsx";
 import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState } from "react";
-import { FaCalendar, FaShoppingCart } from "react-icons/fa";
+import { FaCalendar, FaShoppingBag, FaShoppingCart } from "react-icons/fa";
 import { RiSpyFill } from "react-icons/ri";
-import { TbLayoutDashboardFilled } from "react-icons/tb";
-import ProductsHoverCard from "./products-hover-card";
+import {
+  TbLayoutDashboardFilled,
+  TbLayoutKanban,
+  TbLayoutKanbanFilled,
+} from "react-icons/tb";
+import ProductsHoverCard from "./navbar-expandable-link";
 import { HiOutlineChevronUpDown } from "react-icons/hi2";
 import {
   DropdownMenu,
@@ -23,6 +27,9 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { IoIosSettings } from "react-icons/io";
 import { DropdownMenuSeparator } from "@radix-ui/react-dropdown-menu";
+import ProductsHover from "./navbar-expandable-link";
+import SideBarExpandableLink from "./navbar-expandable-link";
+import { IoPeople, IoPerson } from "react-icons/io5";
 
 const SideBar = () => {
   const [activeLink, setActiveLink] = useState<string>("dashboard");
@@ -58,7 +65,7 @@ const SideBar = () => {
             NOMAD
           </h1>
         </div>
-        <div className="flex flex-col gap-4 text-font-light">
+        <div className="flex flex-col gap-4 text-font-light font-regular">
           <div>
             <Link
               href="/"
@@ -73,27 +80,56 @@ const SideBar = () => {
               <p className="hidden xl:block">Dashboard</p>
             </Link>
           </div>
-          <div>
-            <ProductsHoverCard
-              activeLink={activeLink}
-              setActiveLink={setActiveLink}
-            />
-          </div>
+          <SideBarExpandableLink
+            activeLink={activeLink}
+            setActiveLink={setActiveLink}
+            mainLabel="Products"
+            mainIcon={<FaShoppingBag />}
+            items={[
+              { label: "List View", route: "/products/list" },
+              { label: "Grid View", route: "/products/grid" },
+              { label: "Overview", route: "/products/overview" },
+              { label: "Create Product", route: "/products/create" },
+            ]}
+          />
+          <SideBarExpandableLink
+            activeLink={activeLink}
+            setActiveLink={setActiveLink}
+            mainLabel="Orders"
+            mainIcon={<FaShoppingCart />}
+            items={[
+              { label: "List View", route: "/orders/list" },
+              { label: "OverView", route: "/orders/overview" },
+            ]}
+          />
           <div>
             <Link
-              href="/orders"
-              onClick={() => setActiveLink("orders")}
+              href="/customers"
+              onClick={() => setActiveLink("customers")}
               className={clsx(
                 "flex items-center gap-2.5 p-2.5 pl-3 rounded-md hover:text-purple transition-all",
-                activeLink === "orders" &&
+                activeLink === "customers" &&
                   "text-white bg-purple hover:text-white"
               )}
             >
-              <FaShoppingCart className="text-lg hidden md:block md:text-2xl xl:text-lg" />
-              <p className="hidden xl:block">Orders</p>
+              <IoPerson className="text-lg hidden md:block md:text-2xl xl:text-lg" />
+              <p className="hidden xl:block">Customers</p>
             </Link>
           </div>
-
+          <div>
+            <Link
+              href="/sellers"
+              onClick={() => setActiveLink("sellers")}
+              className={clsx(
+                "flex items-center gap-2.5 p-2.5 pl-3 rounded-md hover:text-purple transition-all",
+                activeLink === "sellers" &&
+                  "text-white bg-purple hover:text-white"
+              )}
+            >
+              <RiSpyFill className="text-lg hidden md:block md:text-2xl xl:text-lg" />
+              <p className="hidden xl:block">Sellers</p>
+            </Link>
+          </div>
           <div>
             <Link
               href="/calendar"
@@ -111,16 +147,16 @@ const SideBar = () => {
 
           <div>
             <Link
-              href="/sellers"
-              onClick={() => setActiveLink("sellers")}
+              href="/kanban"
+              onClick={() => setActiveLink("kanban")}
               className={clsx(
                 "flex items-center gap-2.5 p-2.5 pl-3 rounded-md hover:text-purple transition-all",
-                activeLink === "sellers" &&
+                activeLink === "kanban" &&
                   "text-white bg-purple hover:text-white"
               )}
             >
-              <RiSpyFill className="text-lg hidden md:block md:text-2xl xl:text-lg" />
-              <p className="hidden xl:block">Sellers</p>
+              <TbLayoutKanbanFilled className="text-lg hidden md:block md:text-2xl xl:text-lg" />
+              <p className="hidden xl:block">Kanban</p>
             </Link>
           </div>
         </div>

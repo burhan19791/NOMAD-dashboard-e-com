@@ -2,6 +2,8 @@
 
 import CardTitle from "@/app/components/card-title";
 import {
+  Breadcrumb,
+  BreadcrumbItem,
   Button,
   FileInput,
   Select,
@@ -12,6 +14,7 @@ import {
 } from "flowbite-react";
 import Link from "next/link";
 import { useState } from "react";
+import { FaShoppingBag } from "react-icons/fa";
 import { HiLink, HiUpload } from "react-icons/hi";
 
 const CreateProduct = () => {
@@ -27,6 +30,12 @@ const CreateProduct = () => {
   return (
     <>
       <div className="lg:ml-20 xl:ml-64 p-6">
+        <Breadcrumb className="mb-6">
+          <BreadcrumbItem href="#" icon={FaShoppingBag}>
+            Products
+          </BreadcrumbItem>
+          <BreadcrumbItem href="#">List View</BreadcrumbItem>
+        </Breadcrumb>
         <div className="bg-card-background rounded-lg p-5">
           <CardTitle title="Create Product" />
           <form className="mt-8">
@@ -41,7 +50,7 @@ const CreateProduct = () => {
                 </div>
                 <div className="w-full md:w-96">
                   <TextInput
-                  className="bg-inner-card"
+                    className="bg-inner-card"
                     id="title"
                     type="text"
                     placeholder="Title"
@@ -146,7 +155,7 @@ const CreateProduct = () => {
                   </p>
                 </div>
                 <div className="w-full md:w-96">
-                  <Tabs aria-label="Image input method" >
+                  <Tabs aria-label="Image input method">
                     {/* Upload Tab */}
                     <TabItem active title="Upload" icon={HiUpload}>
                       <FileInput

@@ -2,7 +2,14 @@
 
 import Image from "next/image";
 import React, { useState } from "react";
-import { FaBell, FaMoon, FaRegBell, FaRegMoon, FaSun } from "react-icons/fa";
+import {
+  FaBell,
+  FaMoon,
+  FaRegBell,
+  FaRegMoon,
+  FaSearch,
+  FaSun,
+} from "react-icons/fa";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { RiMenu3Fill } from "react-icons/ri";
 
@@ -34,6 +41,14 @@ const Topbar = () => {
         </div>
       </div>
       <div className="flex items-center gap-4">
+        <div className="w-64 h-9 dark:bg-inner-card border bg-gray-100 border-inner-card-border rounded-lg flex items-center pl-4 pr-2 text-gray-400">
+          <FaSearch className="text-xs text-gray-400" />
+          <input
+            type="text"
+            placeholder="Search..."
+            className="ml-2 text-sm bg-transparent outline-none w-full placeholder:text-gray-400 dark:placeholder:text-gray-400"
+          />
+        </div>
         <div className="w-9 h-9 rounded-full bg-gray-100 dark:bg-inner-card flex items-center justify-center cursor-pointer hover:bg-gray-300">
           <FaBell className="text-gray-400" />
         </div>

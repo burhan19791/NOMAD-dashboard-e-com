@@ -48,7 +48,7 @@ export default function CustomSelect({
   return (
     <div
       ref={dropdownRef}
-      className="relative  inline-block  text-font-primary"
+      className="relative text-nowrap inline-block  text-font-primary"
     >
       <button
         onClick={toggleOpen}
