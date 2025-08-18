@@ -1,18 +1,25 @@
-"use client";
+'use client';
 
-import clsx from "clsx";
-import Image from "next/image";
-import Link from "next/link";
-import { useEffect, useState } from "react";
-import { FaCalendar, FaShoppingBag, FaShoppingCart } from "react-icons/fa";
-import { RiSpyFill } from "react-icons/ri";
+import clsx from 'clsx';
+import Image from 'next/image';
+import Link from 'next/link';
+import { useEffect, useState } from 'react';
+import {
+  FaCalendar,
+  FaFileInvoice,
+  FaShoppingBag,
+  FaShoppingCart,
+  FaUsers,
+  FaCalendarAlt,
+} from 'react-icons/fa';
+import { RiSpyFill } from 'react-icons/ri';
 import {
   TbLayoutDashboardFilled,
   TbLayoutKanban,
   TbLayoutKanbanFilled,
-} from "react-icons/tb";
-import ProductsHoverCard from "./navbar-expandable-link";
-import { HiOutlineChevronUpDown } from "react-icons/hi2";
+} from 'react-icons/tb';
+import ProductsHoverCard from './navbar-expandable-link';
+import { HiOutlineChevronUpDown } from 'react-icons/hi2';
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -24,31 +31,31 @@ import {
   DropdownMenuSubContent,
   DropdownMenuSubTrigger,
   DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
-import { IoIosSettings } from "react-icons/io";
-import { DropdownMenuSeparator } from "@radix-ui/react-dropdown-menu";
-import ProductsHover from "./navbar-expandable-link";
-import SideBarExpandableLink from "./navbar-expandable-link";
-import { IoPeople, IoPerson } from "react-icons/io5";
+} from '@/components/ui/dropdown-menu';
+import { IoIosSettings } from 'react-icons/io';
+import { DropdownMenuSeparator } from '@radix-ui/react-dropdown-menu';
+import ProductsHover from './navbar-expandable-link';
+import SideBarExpandableLink from './navbar-expandable-link';
+import { IoPeople, IoPerson } from 'react-icons/io5';
 
 type Props = {
   isOpen: boolean;
 };
 
 const SideBar = ({ isOpen }: Props) => {
-  const [activeLink, setActiveLink] = useState<string>("dashboard");
+  const [activeLink, setActiveLink] = useState<string>('dashboard');
   const [logoutOpen, setLogoutOpen] = useState(false);
 
   const [isDark, setIsDark] = useState(false);
 
   useEffect(() => {
-    setIsDark(document.documentElement.classList.contains("dark"));
+    setIsDark(document.documentElement.classList.contains('dark'));
     const observer = new MutationObserver(() => {
-      setIsDark(document.documentElement.classList.contains("dark"));
+      setIsDark(document.documentElement.classList.contains('dark'));
     });
     observer.observe(document.documentElement, {
       attributes: true,
-      attributeFilter: ["class"],
+      attributeFilter: ['class'],
     });
     return () => observer.disconnect();
   }, []);
@@ -56,36 +63,34 @@ const SideBar = ({ isOpen }: Props) => {
   return (
     <>
       <nav
-        className={`flex-col fixed top-0 transition-all duration-300  lg:translate-x-0 font-medium min-h-screen -translate-x-full z-50 lg:flex lg:w-20 xl:w-64 pt-7 bg-card-background w-64 p-4 xl:pl-5 xl:p-10
-         ${isOpen ? "translate-x-0" : "-translate-x-full"}
-        `}
+        className={`bg-card-background fixed top-0 z-50 min-h-screen w-64 -translate-x-full flex-col p-4 pt-7 font-medium transition-all duration-300 lg:flex lg:w-20 lg:translate-x-0 xl:w-64 xl:p-10 xl:pl-5 ${isOpen ? 'translate-x-0' : '-translate-x-full'} `}
       >
         {/* logo small show thing */}
-        <div className="flex items-center gap-1.5 mb-10">
-          <div className="w-8 h-8 lg:w-12 lg:h-12 relative xl:w-8 xl:h-8  mt-0.5 top-0 right-0 ">
+        <div className="mb-10 flex items-center gap-1.5">
+          <div className="relative top-0 right-0 mt-0.5 h-8 w-8 lg:h-12 lg:w-12 xl:h-8 xl:w-8">
             {isDark ? (
-              <Image src={"/images/Nomad-logo-white.png"} alt="Logo" fill />
+              <Image src={'/images/Nomad-logo-white.png'} alt="Logo" fill />
             ) : (
-              <Image src={"/images/Nomad-logo-black.png"} alt="Logo" fill />
+              <Image src={'/images/Nomad-logo-black.png'} alt="Logo" fill />
             )}
           </div>
-          <h1 className="text-3xl block lg:hidden xl:block font-bold text-font-primary">
+          <h1 className="text-font-primary block text-3xl font-bold lg:hidden xl:block">
             NOMAD
           </h1>
         </div>
-        <div className="flex flex-col gap-4 text-font-light font-regular">
+        <div className="text-font-light font-regular flex flex-col gap-4">
           <div>
             <Link
               href="/"
-              onClick={() => setActiveLink("dashboard")}
+              onClick={() => setActiveLink('dashboard')}
               className={clsx(
-                "flex items-center gap-2.5 p-2.5 pl-3 rounded-md hover:text-purple transition-all",
-                activeLink === "dashboard" &&
-                  "text-white bg-purple hover:text-white"
+                'hover:text-purple flex items-center gap-2.5 rounded-md p-2.5 pl-3 transition-all',
+                activeLink === 'dashboard' &&
+                  'bg-purple text-white hover:text-white',
               )}
             >
               <TbLayoutDashboardFilled className="text-2xl xl:text-lg" />
-              <p className=" lg:hidden xl:block">Dashboard</p>
+              <p className="lg:hidden xl:block">Dashboard</p>
             </Link>
           </div>
           <SideBarExpandableLink
@@ -94,10 +99,10 @@ const SideBar = ({ isOpen }: Props) => {
             mainLabel="Products"
             mainIcon={<FaShoppingBag />}
             items={[
-              { label: "List View", route: "/products/list" },
-              { label: "Grid View", route: "/products/grid" },
-              { label: "Overview", route: "/products/overview" },
-              { label: "Create Product", route: "/products/create" },
+              { label: 'List View', route: '/products/list' },
+              { label: 'Grid View', route: '/products/grid' },
+              { label: 'Overview', route: '/products/overview' },
+              { label: 'Create Product', route: '/products/create' },
             ]}
           />
           <SideBarExpandableLink
@@ -106,18 +111,28 @@ const SideBar = ({ isOpen }: Props) => {
             mainLabel="Orders"
             mainIcon={<FaShoppingCart />}
             items={[
-              { label: "List View", route: "/orders/list" },
-              { label: "OverView", route: "/orders/overview" },
+              { label: 'List View', route: '/orders/list' },
+              { label: 'OverView', route: '/orders/overview' },
+            ]}
+          />
+          <SideBarExpandableLink
+            activeLink={activeLink}
+            setActiveLink={setActiveLink}
+            mainLabel="Invoices"
+            mainIcon={<FaFileInvoice />}
+            items={[
+              { label: 'List View', route: '/invoice/list' },
+              { label: 'Overview', route: '/invoice/overview' },
             ]}
           />
           <div>
             <Link
               href="/customers"
-              onClick={() => setActiveLink("customers")}
+              onClick={() => setActiveLink('customers')}
               className={clsx(
-                "flex items-center gap-2.5 p-2.5 pl-3 rounded-md hover:text-purple transition-all",
-                activeLink === "customers" &&
-                  "text-white bg-purple hover:text-white"
+                'hover:text-purple flex items-center gap-2.5 rounded-md p-2.5 pl-3 transition-all',
+                activeLink === 'customers' &&
+                  'bg-purple text-white hover:text-white',
               )}
             >
               <IoPerson className="text-lg md:text-2xl xl:text-lg" />
@@ -127,11 +142,11 @@ const SideBar = ({ isOpen }: Props) => {
           <div>
             <Link
               href="/sellers"
-              onClick={() => setActiveLink("sellers")}
+              onClick={() => setActiveLink('sellers')}
               className={clsx(
-                "flex items-center gap-2.5 p-2.5 pl-3 rounded-md hover:text-purple transition-all",
-                activeLink === "sellers" &&
-                  "text-white bg-purple hover:text-white"
+                'hover:text-purple flex items-center gap-2.5 rounded-md p-2.5 pl-3 transition-all',
+                activeLink === 'sellers' &&
+                  'bg-purple text-white hover:text-white',
               )}
             >
               <RiSpyFill className="text-lg md:text-2xl xl:text-lg" />
@@ -141,14 +156,14 @@ const SideBar = ({ isOpen }: Props) => {
           <div>
             <Link
               href="/calendar"
-              onClick={() => setActiveLink("calendar")}
+              onClick={() => setActiveLink('calendar')}
               className={clsx(
-                "flex items-center gap-2.5 p-2.5 pl-3 rounded-md hover:text-purple transition-all",
-                activeLink === "calendar" &&
-                  "text-white bg-purple hover:text-white"
+                'hover:text-purple flex items-center gap-2.5 rounded-md p-2.5 pl-3 transition-all',
+                activeLink === 'calendar' &&
+                  'bg-purple text-white hover:text-white',
               )}
             >
-              <FaCalendar className="text-lg md:text-2xl xl:text-lg" />
+              <FaCalendarAlt className="text-lg md:text-2xl xl:text-lg" />
               <p className="lg:hidden xl:block">Calendar</p>
             </Link>
           </div>
@@ -156,11 +171,11 @@ const SideBar = ({ isOpen }: Props) => {
           <div>
             <Link
               href="/kanban"
-              onClick={() => setActiveLink("kanban")}
+              onClick={() => setActiveLink('kanban')}
               className={clsx(
-                "flex items-center gap-2.5 p-2.5 pl-3 rounded-md hover:text-purple transition-all",
-                activeLink === "kanban" &&
-                  "text-white bg-purple hover:text-white"
+                'hover:text-purple flex items-center gap-2.5 rounded-md p-2.5 pl-3 transition-all',
+                activeLink === 'kanban' &&
+                  'bg-purple text-white hover:text-white',
               )}
             >
               <TbLayoutKanbanFilled className="text-lg md:text-2xl xl:text-lg" />
@@ -169,86 +184,86 @@ const SideBar = ({ isOpen }: Props) => {
           </div>
         </div>
 
-          <DropdownMenu>
-            <DropdownMenuTrigger asChild>
-              <button className="p-2.5 rounded-md mt-56 w-full focus:outline-none hover:bg-gray-100 dark:hover:bg-inner-card flex items-center gap-2 dark:bg-inner-card">
-                <div className="min-w-8 h-8 rounded-lg bg-gray-300 dark:bg-gray-700 flex-shrink-0" />
+        <DropdownMenu>
+          <DropdownMenuTrigger asChild>
+            <button className="dark:hover:bg-inner-card dark:bg-inner-card mt-auto flex w-full items-center gap-2 rounded-md p-2.5 hover:bg-gray-100 focus:outline-none">
+              <div className="h-8 min-w-8 flex-shrink-0 rounded-lg bg-gray-300 dark:bg-gray-700" />
 
-                <div className="flex items-center justify-between w-full">
-                  <div className="text-left lg:hidden xl:flex flex flex-col xl:flex-col">
-                    <p className="text-sm leading-none mb-1 text-font-primary font-bold">
-                      Burhan Shah
-                    </p>
-                    <p className="leading-none text-font-light text-xs tracking-widest uppercase">
-                      Owner
-                    </p>
-                  </div>
-                  <HiOutlineChevronUpDown className="text-xl text-font-light lg:hidden xl:block block" />
-                </div>
-              </button>
-            </DropdownMenuTrigger>
-
-            <DropdownMenuContent
-              side="top" // dropdown appears above the trigger
-              align="start" // align right edge of dropdown to right edge of trigger
-              sideOffset={10} // 8px gap from the trigger
-              alignOffset={50}
-              className="w-56 bg-inner-card border border-gray-200 dark:border-inner-card px-2.5 py-2"
-            >
-              <div className="flex items-center gap-2 p-2">
-                <div className="min-w-8 h-8 rounded-lg bg-gray-300 dark:bg-gray-700"></div>
-                <div className="text-left">
-                  <p className="text-sm leading-none mb-1 text-font-primary font-bold">
+              <div className="flex w-full items-center justify-between">
+                <div className="flex flex-col text-left lg:hidden xl:flex xl:flex-col">
+                  <p className="text-font-primary mb-1 text-sm leading-none font-bold">
                     Burhan Shah
                   </p>
-                  <p className="leading-none text-font-light text-xs tracking-widest uppercase">
+                  <p className="text-font-light text-xs leading-none tracking-widest uppercase">
                     Owner
                   </p>
                 </div>
+                <HiOutlineChevronUpDown className="text-font-light block text-xl lg:hidden xl:block" />
               </div>
+            </button>
+          </DropdownMenuTrigger>
 
-              <DropdownMenuGroup className="text-font-primary">
-                <DropdownMenuItem className="-mb-1 mt-2 text-xs" disabled>
-                  My Account
-                </DropdownMenuItem>
-                <DropdownMenuItem className="hover:bg-gray-100 dark:hover:bg-card-background">
-                  Profile
-                </DropdownMenuItem>
-                <DropdownMenuItem className="hover:bg-gray-100 dark:hover:bg-card-background">
-                  Preferences
-                </DropdownMenuItem>
+          <DropdownMenuContent
+            side="top" // dropdown appears above the trigger
+            align="start" // align right edge of dropdown to right edge of trigger
+            sideOffset={10} // 8px gap from the trigger
+            alignOffset={50}
+            className="bg-inner-card dark:border-inner-card w-56 border border-gray-200 px-2.5 py-2"
+          >
+            <div className="flex items-center gap-2 p-2">
+              <div className="h-8 min-w-8 rounded-lg bg-gray-300 dark:bg-gray-700"></div>
+              <div className="text-left">
+                <p className="text-font-primary mb-1 text-sm leading-none font-bold">
+                  Burhan Shah
+                </p>
+                <p className="text-font-light text-xs leading-none tracking-widest uppercase">
+                  Owner
+                </p>
+              </div>
+            </div>
 
-                <DropdownMenuSeparator className="border-gray-200 dark:border-gray-700" />
-                <DropdownMenuItem className="-mb-1 mt-2 text-xs" disabled>
-                  App Settings
-                </DropdownMenuItem>
-                <DropdownMenuItem className="hover:bg-gray-100 dark:hover:bg-card-background">
-                  Settings
-                </DropdownMenuItem>
-                <DropdownMenuItem className="hover:bg-gray-100 dark:hover:bg-card-background">
-                  Privacy
-                </DropdownMenuItem>
-                <DropdownMenuItem className="-mb-1 mt-2 text-xs" disabled>
-                  Team And Collaboration
-                </DropdownMenuItem>
-                <DropdownMenuSeparator className="border-gray-200 dark:border-gray-700" />
-                <DropdownMenuItem className="hover:bg-gray-100 dark:hover:bg-card-background">
-                  Team
-                </DropdownMenuItem>
-                <DropdownMenuItem className="hover:bg-gray-100 dark:hover:bg-card-background">
-                  Manage Members
-                </DropdownMenuItem>
-                <DropdownMenuItem className="hover:bg-gray-100 dark:hover:bg-card-background">
-                  Invite People
-                </DropdownMenuItem>
-                <DropdownMenuItem className="-mb-1 mt-2 text-xs" disabled />
-                <DropdownMenuSeparator className="border-gray-200 dark:border-gray-700" />
-                <DropdownMenuItem className="hover:bg-gray-100 dark:hover:bg-card-background">
-                  Log out
-                </DropdownMenuItem>
-              </DropdownMenuGroup>
-            </DropdownMenuContent>
-          </DropdownMenu>
+            <DropdownMenuGroup className="text-font-primary">
+              <DropdownMenuItem className="mt-2 -mb-1 text-xs" disabled>
+                My Account
+              </DropdownMenuItem>
+              <DropdownMenuItem className="dark:hover:bg-card-background hover:bg-gray-100">
+                Profile
+              </DropdownMenuItem>
+              <DropdownMenuItem className="dark:hover:bg-card-background hover:bg-gray-100">
+                Preferences
+              </DropdownMenuItem>
+
+              <DropdownMenuSeparator className="border-gray-200 dark:border-gray-700" />
+              <DropdownMenuItem className="mt-2 -mb-1 text-xs" disabled>
+                App Settings
+              </DropdownMenuItem>
+              <DropdownMenuItem className="dark:hover:bg-card-background hover:bg-gray-100">
+                Settings
+              </DropdownMenuItem>
+              <DropdownMenuItem className="dark:hover:bg-card-background hover:bg-gray-100">
+                Privacy
+              </DropdownMenuItem>
+              <DropdownMenuItem className="mt-2 -mb-1 text-xs" disabled>
+                Team And Collaboration
+              </DropdownMenuItem>
+              <DropdownMenuSeparator className="border-gray-200 dark:border-gray-700" />
+              <DropdownMenuItem className="dark:hover:bg-card-background hover:bg-gray-100">
+                Team
+              </DropdownMenuItem>
+              <DropdownMenuItem className="dark:hover:bg-card-background hover:bg-gray-100">
+                Manage Members
+              </DropdownMenuItem>
+              <DropdownMenuItem className="dark:hover:bg-card-background hover:bg-gray-100">
+                Invite People
+              </DropdownMenuItem>
+              <DropdownMenuItem className="mt-2 -mb-1 text-xs" disabled />
+              <DropdownMenuSeparator className="border-gray-200 dark:border-gray-700" />
+              <DropdownMenuItem className="dark:hover:bg-card-background hover:bg-gray-100">
+                Log out
+              </DropdownMenuItem>
+            </DropdownMenuGroup>
+          </DropdownMenuContent>
+        </DropdownMenu>
       </nav>
     </>
   );

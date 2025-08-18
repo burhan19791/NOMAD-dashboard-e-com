@@ -1,9 +1,9 @@
-"use client";
+'use client';
 
-import CardTitle from "@/app/components/card-title";
-import ProductsTable from "@/app/components/products/productsList/product-tables.tsx/products-table";
-import ProductsOverviewCard from "@/app/components/products/productsList/products-overview-cards/products-overview-cards";
-import { Breadcrumb, BreadcrumbItem, Button } from "flowbite-react";
+import CardTitle from '@/app/components/card-title';
+import ProductsTable from '@/app/components/products/productsList/product-tables.tsx/products-table';
+import ProductsOverviewCard from '@/app/components/products/productsList/products-overview-cards/products-overview-cards';
+import { Breadcrumb, BreadcrumbItem, Button } from 'flowbite-react';
 import {
   FaBox,
   FaDollarSign,
@@ -12,13 +12,13 @@ import {
   FaPrint,
   FaShoppingBag,
   FaWallet,
-} from "react-icons/fa";
-import { TiPlus } from "react-icons/ti";
-import { MdPrint } from "react-icons/md";
+} from 'react-icons/fa';
+import { TiPlus } from 'react-icons/ti';
+import { MdPrint } from 'react-icons/md';
 
 const ProductsList = () => {
   return (
-    <div className="lg:ml-20 xl:ml-64 p-6">
+    <div className="p-6 lg:ml-20 xl:ml-64">
       <Breadcrumb className="mb-6">
         <BreadcrumbItem href="#" icon={FaShoppingBag}>
           Products
@@ -26,7 +26,7 @@ const ProductsList = () => {
         <BreadcrumbItem href="#">List View</BreadcrumbItem>
       </Breadcrumb>
       <div className="grid grid-cols-12 gap-4">
-        <div className="col-span-12 xl:col-span-3 md:col-span-6">
+        <div className="col-span-12 md:col-span-6 xl:col-span-3">
           <ProductsOverviewCard
             title="Total Revenue"
             description="Revenue from products"
@@ -38,7 +38,7 @@ const ProductsList = () => {
           />
         </div>
 
-        <div className="col-span-12 xl:col-span-3 md:col-span-6">
+        <div className="col-span-12 md:col-span-6 xl:col-span-3">
           <ProductsOverviewCard
             title="Total Products"
             description="Number of products"
@@ -49,7 +49,7 @@ const ProductsList = () => {
           />
         </div>
 
-        <div className="col-span-12 xl:col-span-3 md:col-span-6">
+        <div className="col-span-12 md:col-span-6 xl:col-span-3">
           <ProductsOverviewCard
             title="Out of Stock"
             description="Products fully out of stock"
@@ -60,7 +60,7 @@ const ProductsList = () => {
           />
         </div>
 
-        <div className="col-span-12 xl:col-span-3 md:col-span-6">
+        <div className="col-span-12 md:col-span-6 xl:col-span-3">
           <ProductsOverviewCard
             title="Inventory Value"
             description="Value of current stock"
@@ -71,26 +71,21 @@ const ProductsList = () => {
         {/* <div className="col-span-12">
           <TableSortingCard />
         </div>   */}
+        
 
-        <div className="col-span-12 flex justify-between items-center">
+        <div className="col-span-12 flex items-center justify-between">
           <CardTitle title="Products List" />
-          <div className="flex items-center md:gap-4 gap-2">
-            <Button
-              className="bg-white gap-2 dark:hover:bg-inner-card py-2 px-3 md:py-5 md:px-4 hover:bg-gray-200 border border-gray-300  dark:border-inner-card dark:bg-inner-card text-font-primary"
-            >
+          <div className="flex items-center gap-2 md:gap-4">
+            <Button className="dark:hover:bg-inner-card dark:border-inner-card dark:bg-inner-card text-font-primary gap-2 border border-gray-300 bg-white px-3 py-2 hover:bg-gray-200 md:px-4 md:py-5">
               <FaDownload />
               <div className="hidden md:flex">Download</div>
             </Button>
-            <Button
-              className="bg-white gap-2 dark:hover:bg-inner-card py-2 px-3 md:py-5 md:px-4 hover:bg-gray-200 border border-gray-300  dark:border-inner-card dark:bg-inner-card text-font-primary"
-            >
-              <MdPrint className="text-lg"/>
+            <Button className="dark:hover:bg-inner-card dark:border-inner-card dark:bg-inner-card text-font-primary gap-2 border border-gray-300 bg-white px-3 py-2 hover:bg-gray-200 md:px-4 md:py-5">
+              <MdPrint className="text-lg" />
               <div className="hidden md:flex">Print</div>
             </Button>
-           <Button
-              className="bg-purple dark:bg-purple dark:hover:bg-purple-700 gap-2 py-2 px-3 md:py-5 md:px-4 hover:bg-purple-700  text-white"
-            >
-              <TiPlus className="text-lg"/>
+            <Button className="bg-purple dark:bg-purple gap-2 px-3 py-2 text-white hover:bg-purple-700 md:px-4 md:py-5 dark:hover:bg-purple-700">
+              <TiPlus className="text-lg" />
               <div className="hidden md:flex">Add New Product</div>
             </Button>
           </div>
