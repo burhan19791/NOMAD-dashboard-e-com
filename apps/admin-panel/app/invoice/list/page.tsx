@@ -3,15 +3,8 @@
 import CardTitle from '@/app/components/card-title';
 import { Breadcrumb, BreadcrumbItem, Button } from 'flowbite-react';
 import {
-  FaDollarSign,
-  FaDownload,
-  FaExclamationTriangle,
-  FaFileInvoice,
-  FaPrint,
-  FaReceipt,
-  FaChartLine,
-  FaClock,
-  FaCheckCircle,
+  FaDownload, FaFileInvoice, FaChartLine,
+  FaClock
 } from 'react-icons/fa';
 import { TiPlus } from 'react-icons/ti';
 import { MdPrint } from 'react-icons/md';

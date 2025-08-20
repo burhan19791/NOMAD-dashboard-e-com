@@ -15,7 +15,7 @@ import {
 } from 'flowbite-react';
 import Image from 'next/image';
 import React, { useEffect, useState } from 'react';
-import { FaDownload, FaFileInvoice } from 'react-icons/fa';
+import { FaDownload } from 'react-icons/fa';
 import { FaFileLines } from 'react-icons/fa6';
 import { IoPrint } from 'react-icons/io5';
 

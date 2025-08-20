@@ -1,6 +1,5 @@
 'use client';
 
-import CardTitle from '@/app/components/card-title';
 import SortBySelect from '@/app/components/sort-by-select';
 import {
   DropdownMenu,
@@ -25,17 +24,14 @@ import {
   MoreHorizontal,
   Pencil,
   Trash,
-  Clock,
-  CheckCircle,
-  AlertCircle,
+  Clock, AlertCircle
 } from 'lucide-react';
 
 import { useState } from 'react';
 import {
-  FaSearch,
   FaSlidersH,
   FaCalendarAlt,
-  FaMoneyBillWave,
+  FaMoneyBillWave
 } from 'react-icons/fa';
 import CustomSearch from '@/app/components/custom-search';
 

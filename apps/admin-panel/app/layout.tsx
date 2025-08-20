@@ -1,25 +1,22 @@
-import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
-import "./globals.css";
-import Topbar from "./components/topbar";
-import Head from "next/head";
-import SideBar2 from "./components/side-bar";
-import SideBar from "./components/side-bar";
-import TopbarSidebarLayout from "./components/topbar-sidebar-layout";
+import type { Metadata } from 'next';
+import { Geist, Geist_Mono } from 'next/font/google';
+import './globals.css';
+import Head from 'next/head';
+import TopbarSidebarLayout from './components/topbar-sidebar-layout';
 
 const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
+  variable: '--font-geist-sans',
+  subsets: ['latin'],
 });
 
 const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
+  variable: '--font-geist-mono',
+  subsets: ['latin'],
 });
 
 export const metadata: Metadata = {
-  title: "Nomad Admin Panel",
-  description: "Admin panel for managing all applications",
+  title: 'Nomad Admin Panel',
+  description: 'Admin panel for managing all applications',
 };
 
 export default function RootLayout({

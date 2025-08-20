@@ -5,40 +5,28 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
 import {
-  FaCalendar,
-  FaFileInvoice,
   FaShoppingBag,
   FaShoppingCart,
-  FaUsers,
   FaCalendarAlt,
   FaLock,
+  FaTags,
 } from 'react-icons/fa';
 import { RiSpyFill } from 'react-icons/ri';
-import {
-  TbLayoutDashboardFilled,
-  TbLayoutKanban,
-  TbLayoutKanbanFilled,
-} from 'react-icons/tb';
-import ProductsHoverCard from './navbar-expandable-link';
+import { TbLayoutDashboardFilled, TbLayoutKanbanFilled } from 'react-icons/tb';
 import { HiOutlineChevronUpDown } from 'react-icons/hi2';
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuGroup,
   DropdownMenuItem,
-  DropdownMenuPortal,
-  DropdownMenuShortcut,
-  DropdownMenuSub,
-  DropdownMenuSubContent,
-  DropdownMenuSubTrigger,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
-import { IoIosSettings } from 'react-icons/io';
 import { DropdownMenuSeparator } from '@radix-ui/react-dropdown-menu';
-import ProductsHover from './navbar-expandable-link';
 import SideBarExpandableLink from './navbar-expandable-link';
-import { IoPeople, IoPerson } from 'react-icons/io5';
+import { IoPerson } from 'react-icons/io5';
 import { FaFileLines } from 'react-icons/fa6';
+import { IoIosStats } from 'react-icons/io';
+
 
 type Props = {
   isOpen: boolean;
@@ -46,7 +34,6 @@ type Props = {
 
 const SideBar = ({ isOpen }: Props) => {
   const [activeLink, setActiveLink] = useState<string>('dashboard');
-  const [logoutOpen, setLogoutOpen] = useState(false);
 
   const [isDark, setIsDark] = useState(false);
 
@@ -80,7 +67,7 @@ const SideBar = ({ isOpen }: Props) => {
             NOMAD
           </h1>
         </div>
-        <div className="text-font-light font-regular flex flex-col gap-4">
+        <div className="text-font-light font-regular flex h-[550px] flex-col gap-4 overflow-y-scroll">
           <div>
             <Link
               href="/"
@@ -143,6 +130,20 @@ const SideBar = ({ isOpen }: Props) => {
           </div>
           <div>
             <Link
+              href="/coupons"
+              onClick={() => setActiveLink('coupons')}
+              className={clsx(
+                'hover:text-purple flex items-center gap-2.5 rounded-md p-2.5 pl-3 transition-all',
+                activeLink === 'coupons' &&
+                  'bg-purple text-white hover:text-white',
+              )}
+            >
+              <FaTags className="text-lg md:text-2xl xl:text-lg" />
+              <p className="lg:hidden xl:block">Coupons</p>
+            </Link>
+          </div>
+          <div>
+            <Link
               href="/sellers"
               onClick={() => setActiveLink('sellers')}
               className={clsx(
@@ -153,6 +154,20 @@ const SideBar = ({ isOpen }: Props) => {
             >
               <RiSpyFill className="text-lg md:text-2xl xl:text-lg" />
               <p className="lg:hidden xl:block">Sellers</p>
+            </Link>
+          </div>
+          <div>
+            <Link
+              href="/analytics"
+              onClick={() => setActiveLink('analytics')}
+              className={clsx(
+                'hover:text-purple flex items-center gap-2.5 rounded-md p-2.5 pl-3 transition-all',
+                activeLink === 'analytics' &&
+                  'bg-purple text-white hover:text-white',
+              )}
+            >
+              <IoIosStats className="text-lg md:text-2xl xl:text-lg" />
+              <p className="lg:hidden xl:block">Analytics</p>
             </Link>
           </div>
           <div>
