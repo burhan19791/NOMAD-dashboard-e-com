@@ -1,11 +1,11 @@
-"use client";
+'use client';
 
-import { FaChevronDown, FaChevronRight } from "react-icons/fa";
-import Link from "next/link";
-import clsx from "clsx";
-import { useState, useRef, useEffect } from "react";
-import { createPortal } from "react-dom";
-import { useRouter } from "next/navigation";
+import { FaChevronDown, FaChevronRight } from 'react-icons/fa';
+import Link from 'next/link';
+import clsx from 'clsx';
+import { useState, useRef, useEffect } from 'react';
+import { createPortal } from 'react-dom';
+import { useRouter } from 'next/navigation';
 
 type MenuItem = {
   label: string;
@@ -31,13 +31,13 @@ const SideBarExpandableLink = ({
   const timeoutRef = useRef<NodeJS.Timeout | null>(null);
   const buttonRef = useRef<HTMLButtonElement | null>(null);
   const [portalContainer, setPortalContainer] = useState<HTMLElement | null>(
-    null
+    null,
   );
-  const [subLinkSelected, setSubLinkSelected] = useState<string>("");
+  const [subLinkSelected, setSubLinkSelected] = useState<string>('');
   const router = useRouter();
 
   useEffect(() => {
-    const el = document.createElement("div");
+    const el = document.createElement('div');
     document.body.appendChild(el);
     setPortalContainer(el);
     return () => {
@@ -45,7 +45,7 @@ const SideBarExpandableLink = ({
     };
   }, []);
   const isHoverEnabled = () => {
-    if (typeof window === "undefined") return false;
+    if (typeof window === 'undefined') return false;
     const width = window.innerWidth;
     return width >= 1024 && width < 1280; // only lg, exclude xl and above
   };
@@ -74,18 +74,18 @@ const SideBarExpandableLink = ({
       <button
         ref={buttonRef}
         onClick={() => setActiveLink(mainLabel.toLowerCase())}
-        className="p-2.5 w-full pl-3 rounded-md transition-all hover:text-purple"
+        className="hover:text-purple w-full rounded-md p-2.5 pl-3 transition-all"
       >
         <div
           onClick={() => setIsOpen(!isOpen)}
-          className="hover:text-purple flex items-center gap-2.5 text-font-light"
+          className="hover:text-purple text-font-light flex items-center gap-2.5"
         >
           {mainIcon && (
             <span className="text-2xl md:flex md:text-2xl xl:text-lg">
               {mainIcon}
             </span>
           )}
-          <div className="lg:hidden xl:flex flex items-center gap-3">
+          <div className="flex items-center gap-3 lg:hidden xl:flex">
             {mainLabel}
             {isOpen ? (
               <FaChevronDown className="text-xs" />
@@ -96,7 +96,7 @@ const SideBarExpandableLink = ({
         </div>
 
         {isOpen && (
-          <div className="ml-7 mt-3 lg:hidden flex-col gap-2 flex text-sm xl:flex xl:flex-col xl:gap-2 text-left text-font-light">
+          <div className="text-font-light mt-3 ml-7 flex flex-col gap-2 text-left text-sm lg:hidden xl:flex xl:flex-col xl:gap-2">
             {items.map((item) => (
               <div
                 key={item.label}
@@ -105,9 +105,9 @@ const SideBarExpandableLink = ({
                   router.push(item.route);
                 }}
                 className={clsx(
-                  "hover:text-purple",
+                  'hover:text-purple',
                   subLinkSelected === item.label.toLowerCase() &&
-                    "text-purple font-semibold"
+                    'text-purple font-semibold',
                 )}
               >
                 {item.label}
@@ -121,18 +121,18 @@ const SideBarExpandableLink = ({
         ? createPortal(
             <div
               style={{
-                position: "absolute",
-                top: buttonRect.top + window.scrollY + "px",
-                left: buttonRect.right + 8 + window.scrollX + "px",
+                position: 'absolute',
+                top: buttonRect.top + window.scrollY + 'px',
+                left: buttonRect.right + 8 + window.scrollX + 'px',
                 zIndex: 999999,
-                minWidth: "160px",
+                minWidth: '160px',
               }}
-              className="hidden lg:flex xl:hidden bg-inner-card p-4 rounded-md shadow-xl flex-col gap-3 text-font-light"
+              className="bg-inner-card text-font-light hidden flex-col gap-3 rounded-md p-4 shadow-xl lg:flex xl:hidden"
               onMouseEnter={handleMouseEnter}
               onMouseLeave={handleMouseLeave}
             >
-              <div className="absolute -left-1 top-3 w-3 h-3 bg-card-background rotate-45 shadow-md"></div>
-              <div className="xl:hidden flex text-font-primary text-sm font-medium">
+              <div className="bg-card-background absolute top-3 -left-1 h-3 w-3 rotate-45 shadow-md"></div>
+              <div className="text-font-primary flex text-sm font-medium xl:hidden">
                 {mainLabel}
               </div>
 
@@ -142,15 +142,15 @@ const SideBarExpandableLink = ({
                   href={item.route}
                   onClick={() => setActiveLink(item.route)}
                   className={clsx(
-                    "transition hover:text-purple",
-                    activeLink === item.route && "text-purple font-semibold"
+                    'hover:text-purple transition',
+                    activeLink === item.route && 'text-purple font-semibold',
                   )}
                 >
                   {item.label}
                 </Link>
               ))}
             </div>,
-            portalContainer
+            portalContainer,
           )
         : null}
     </div>

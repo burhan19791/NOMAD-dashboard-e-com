@@ -11,6 +11,7 @@ import {
   FaShoppingCart,
   FaUsers,
   FaCalendarAlt,
+  FaLock,
 } from 'react-icons/fa';
 import { RiSpyFill } from 'react-icons/ri';
 import {
@@ -37,6 +38,7 @@ import { DropdownMenuSeparator } from '@radix-ui/react-dropdown-menu';
 import ProductsHover from './navbar-expandable-link';
 import SideBarExpandableLink from './navbar-expandable-link';
 import { IoPeople, IoPerson } from 'react-icons/io5';
+import { FaFileLines } from 'react-icons/fa6';
 
 type Props = {
   isOpen: boolean;
@@ -119,7 +121,7 @@ const SideBar = ({ isOpen }: Props) => {
             activeLink={activeLink}
             setActiveLink={setActiveLink}
             mainLabel="Invoices"
-            mainIcon={<FaFileInvoice />}
+            mainIcon={<FaFileLines />}
             items={[
               { label: 'List View', route: '/invoice/list' },
               { label: 'Overview', route: '/invoice/overview' },
@@ -180,6 +182,20 @@ const SideBar = ({ isOpen }: Props) => {
             >
               <TbLayoutKanbanFilled className="text-lg md:text-2xl xl:text-lg" />
               <p className="lg:hidden xl:block">Kanban</p>
+            </Link>
+          </div>
+          <div>
+            <Link
+              href="/auth-page"
+              onClick={() => setActiveLink('auth')}
+              className={clsx(
+                'hover:text-purple flex items-center gap-2.5 rounded-md p-2.5 pl-3 transition-all',
+                activeLink === 'auth' &&
+                  'bg-purple text-white hover:text-white',
+              )}
+            >
+              <FaLock className="text-lg md:text-2xl xl:text-lg" />
+              <p className="lg:hidden xl:block">Auth</p>
             </Link>
           </div>
         </div>

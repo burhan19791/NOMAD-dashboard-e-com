@@ -17,12 +17,13 @@ import { TiPlus } from 'react-icons/ti';
 import { MdPrint } from 'react-icons/md';
 import InvoicesTable from '@/app/components/invoices/invoices-table';
 import InvoiceCard from '@/app/components/invoices/invoice-card';
+import { FaFileLines } from 'react-icons/fa6';
 
 const InvoicesList = () => {
   return (
     <div className="p-6 lg:ml-20 xl:ml-64">
       <Breadcrumb className="mb-6">
-        <BreadcrumbItem href="#" icon={FaFileInvoice}>
+        <BreadcrumbItem href="#" icon={FaFileLines}>
           Invoices
         </BreadcrumbItem>
         <BreadcrumbItem href="#">List View</BreadcrumbItem>
